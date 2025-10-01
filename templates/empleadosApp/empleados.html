@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+{% load static %}
+
+<!-- Para cambiar el tema ir a https://bootswatch.com/ -->
 
 <head>
     <meta charset="UTF-8">
@@ -7,7 +10,7 @@
     <title>Empleados</title>
 
     <!-- Css de BS5 -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/css/bootstrap.min.css">
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.datatables.net/2.3.4/css/dataTables.bootstrap5.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/3.2.5/css/buttons.bootstrap5.css">
     <!-- CSS icons -->
@@ -45,15 +48,42 @@
                 <td>{{ emp.correo }}</td>
                 <td>{{ emp.telefono }}</td>
                 <td>
-                    <a href="{% url 'editarEmpleado' emp.id %}" class="text-warning"><i class="bi bi-pencil-square"></i></a>
-                    <a href="{% url 'eliminarEmpleado' emp.id %}" class="text-danger"><i class="bi bi-trash"></i></a>
+                    <a href="{% url 'editarEmpleado' emp.id %}" class="text-warning"><i
+                            class="bi bi-pencil-square"></i></a>
+                    <a href="#" class="text-danger" data-bs-toggle="modal" data-bs-target="#exampleModal{{ emp.id }}"><i
+                            class="bi bi-trash"></i></a>
                 </td>
             </tr>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal{{ emp.id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Eliminar</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            ¿Estas seguro que quieres eliminar el empleado {{ emp.id }}?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
+                            <a href="{% url 'eliminarEmpleado' emp.id %}" type="button" class="btn btn-danger">Confirmar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             {% endfor %}
             {% endif %}
 
         </tbody>
     </table>
+
+
+
+
 
 
     <!-- JS de datatable -->

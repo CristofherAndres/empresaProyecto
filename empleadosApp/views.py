@@ -25,7 +25,9 @@ def crearEmpleado(request):
             return HttpResponseRedirect(reverse('listaEmpleado')) # IR a la lista de empleados
 
     data = {'form':form,
-            'titulo':'Crear Empleado 👨'
+            'titulo':'Crear Empleado 👨',
+            'txtBoton' : 'Crear Empleado',
+            'colorAlert': 'alert-danger'
             }
     return render(request,'empleadosApp/empleadoRegistro.html',data)
 
@@ -39,7 +41,9 @@ def editarEmpleado(request, id):
             return HttpResponseRedirect(reverse('listaEmpleado')) # IR a la lista de empleados
 
     data = {'form':form,
-            'titulo':'Editar Empleado 👨'
+            'titulo':'Editar Empleado 👨',
+            'txtBoton' : 'Guardar cambios',
+            'colorAlert': 'alert-warning'
             }
     return render(request,'empleadosApp/empleadoRegistro.html',data)
 
